@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const app = express();
-const PORT = 3002;
+const PORT = 3000;
 
 // Sample project data
 const projects = [
@@ -32,7 +32,7 @@ app.use(express.json());
 
 // API route to fetch all projects
 app.get('/api/projects', (req, res) => {
-  connection.query('SELECT * FROM projects', (error, results) => {
+  db.query('SELECT * FROM projects', (error, results) => {
     if (error) throw error;
     res.json(results);
   });
@@ -69,10 +69,6 @@ app.post('/create-project', (req, res) => {
       res.send('Project data inserted successfully!');
     }
   });
-});
-
-app.listen(3001, () => {
-  console.log('Server running on http://localhost:3002');
 });
 
 // Start server
