@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMFeLKfeNVLRk1kuXe7wACM2scaYftofA",
+  apiKey: "",
   authDomain: "crowdfunding-platform-4ffd2.firebaseapp.com",
   projectId: "crowdfunding-platform-4ffd2",
   storageBucket: "crowdfunding-platform-4ffd2.appspot.co",
