@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import CreateProject from "./pages/CreateProject.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ProjectDetails from "./pages/ProjectDetails.jsx";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import AnimatedBackground from "./components/AnimatedBackground.jsx";
+import ScrollSections from "./components/ScrollSections.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <ErrorBoundary>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <AnimatedBackground />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/create-project" element={<CreateProject />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/project/:id" element={<ProjectDetails />} />
+              <Route path="/scroll" element={<ScrollSections />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </ErrorBoundary>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

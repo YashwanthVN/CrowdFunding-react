@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_BASE_URL; // Adjust this if your backend is on a different port
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const getProjects = async () => {
   try {
     const response = await axios.get(`${API_URL}/projects`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching projects:', error);
+    console.error("Error fetching projects:", error);
     throw error;
   }
 };
@@ -27,7 +27,7 @@ export const createProject = async (projectData) => {
     const response = await axios.post(`${API_URL}/projects`, projectData);
     return response.data;
   } catch (error) {
-    console.error('Error creating project:', error);
+    console.error("Error creating project:", error);
     throw error;
   }
 };
@@ -52,22 +52,12 @@ export const deleteProject = async (id) => {
   }
 };
 
-export const CreateProject = async (projectData) => {
-  try {
-    const response = await axios.post(`${API_URL}/projects`, projectData);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating project:', error);
-    throw error;
-  }
-};
-
 export const getDashboardData = async () => {
   try {
     const response = await axios.get(`${API_URL}/dashboard`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching dashboard data:', error);
+    console.error("Error fetching dashboard data:", error);
     throw error;
   }
 };
@@ -77,7 +67,7 @@ export const getTotalFundedProjects = async () => {
     const response = await axios.get(`${API_URL}/projects/funded`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching total funded projects:', error);
+    console.error("Error fetching total funded projects:", error);
     throw error;
   }
 };
