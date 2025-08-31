@@ -1,12 +1,23 @@
-# React + Vite
+# CrowdFunding Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern crowdfunding platform built as part of an academic Full Stack Development (FSD) project. This application allows users to create, browse, and fund projects, featuring a responsive frontend, API integration, and real-time data management.
 
-Currently, two official plugins are available:
+## Features
+- **Project Creation**: Users can create new crowdfunding campaigns with details like title, description, goal amount, and end date.
+- **Project Browsing**: View a list of active projects with details and funding status.
+- **User Authentication**: Secure login and registration using Firebase Authentication.
+- **Responsive Design**: Optimized for desktop and mobile devices with Tailwind CSS.
+- **Real-time Updates**: Fetch and display project data via API integration.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
+- **Frontend**: React, Vite, SWC, React Router, Tailwind CSS, GSAP, Locomotive Scroll, Framer Motion
+- **State Management**: React Hooks
+- **API**: Axios for HTTP requests, custom backend API (or mock API with JSON Server)
+- **Authentication & Database**: Firebase Authentication, Firestore
+- **Libraries**: React Toastify, Recharts
+- **Version Control**: Git, GitHub
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/username/CrowdFunding-react-new.git
