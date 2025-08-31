@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard.jsx";
 import ProjectDetails from "./pages/ProjectDetails.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
-import AnimatedBackground from "./components/AnimatedBackground.jsx";
 import ScrollSections from "./components/ScrollSections.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
@@ -14,9 +13,8 @@ function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-gray-100"> {/* Added bg-gray-100 as fallback */}
           <Header />
-          <AnimatedBackground />
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />

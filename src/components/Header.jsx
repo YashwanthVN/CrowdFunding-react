@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/venture_forge_transparent.png';
+import logo from '../assets/venture_forge.svg';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,17 +12,16 @@ const Header = () => {
 
   return (
     <header className="bg-blue-600 text-white shadow-md">
-      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Replace text with clickable image */}
-        <Link to="/">
+      <div className="container mx-auto px-4 py-4 flex flex-col lg:flex-row items-center justify-center">
+        <Link to="/" className="mb-4 lg:mb-0">
           <img 
-            src={logo}// Replace with your image path
+            src={logo} 
             alt="Venture Forge Logo"
-            className="h-12"  // You can adjust the height or other styles of the image
+            className="h-10"
           />
         </Link>
         <button 
-          className="lg:hidden focus:outline-none" 
+          className="lg:hidden focus:outline-none ml-auto" 
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"
         >
@@ -30,11 +29,12 @@ const Header = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
-        <ul className={`lg:flex lg:space-x-4 ${menuOpen ? 'block' : 'hidden'} space-y-4 lg:space-y-0 lg:block`}>
+        <ul className={`lg:flex lg:space-x-4 ${menuOpen ? 'block' : 'hidden'} space-y-4 lg:space-y-0 lg:block absolute lg:static bg-blue-600 lg:bg-transparent top-16 right-4 lg:right-auto p-4 lg:p-0 rounded-lg lg:rounded-none w-48 lg:w-auto`}>
           <li>
             <Link 
               to="/" 
-              className={`hover:text-blue-200 ${location.pathname === '/' ? 'font-bold' : ''}`}
+              className={`block hover:text-blue-200 ${location.pathname === '/' ? 'font-bold' : ''}`}
+              onClick={() => setMenuOpen(false)}
             >
               Home
             </Link>
@@ -42,15 +42,17 @@ const Header = () => {
           <li>
             <Link 
               to="/create-project" 
-              className={`hover:text-blue-200 ${location.pathname === '/create-project' ? 'font-bold' : ''}`}
+              className={`block hover:text-blue-200 ${location.pathname === '/create-project' ? 'font-bold' : ''}`}
+              onClick={() => setMenuOpen(false)}
             >
-              Start a Project
+              Create Project
             </Link>
           </li>
           <li>
             <Link 
               to="/dashboard" 
-              className={`hover:text-blue-200 ${location.pathname === '/dashboard' ? 'font-bold' : ''}`}
+              className={`block hover:text-blue-200 ${location.pathname === '/dashboard' ? 'font-bold' : ''}`}
+              onClick={() => setMenuOpen(false)}
             >
               Dashboard
             </Link>
@@ -58,13 +60,14 @@ const Header = () => {
           <li>
             <Link 
               to="/login" 
-              className={`hover:text-blue-200 ${location.pathname === '/login' ? 'font-bold' : ''}`}
+              className={`block hover:text-blue-200 ${location.pathname === '/login' ? 'font-bold' : ''}`}
+              onClick={() => setMenuOpen(false)}
             >
-              Sign Up
+              Login
             </Link>
           </li>
         </ul>
-      </nav>
+      </div>
     </header>
   );
 };
