@@ -78,3 +78,69 @@ code {
   stroke: white;
   stroke-width: 2;
 }
+
+/* Apple-inspired global styles */
+h1, h2, h3 {
+  font-weight: 600; /* Bold but not heavy */
+}
+
+label {
+  font-size: 0.875rem; /* 14px */
+  color: #6c757d; /* Gray for labels */
+}
+
+.input-field {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: #007aff; /* Apple's blue */
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); /* Subtle focus ring */
+}
+
+.auth-button {
+  background-color: #007aff;
+  color: white;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.auth-button:hover {
+  background-color: #0056b3; /* Darker blue */
+}
+
+.auth-button.loading {
+  background-color: #ced4da;
+  cursor: not-allowed;
+}
+
+/* Container for forms */
+.form-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 28rem; /* Apple-like narrow form width */
+  margin: 0 auto;
+}
+
+/* Hero and other sections */
+.hero {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.project-card {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  overflow: hidden;
+}
