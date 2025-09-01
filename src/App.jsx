@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard.jsx";
 import ProjectDetails from "./pages/ProjectDetails.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
-import ScrollSections from "./components/ScrollSections.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
               <Route path="/create-project" element={<CreateProject />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/project/:id" element={<ProjectDetails />} />
-              <Route path="/scroll" element={<ScrollSections />} />
             </Routes>
           </main>
           <Footer />
