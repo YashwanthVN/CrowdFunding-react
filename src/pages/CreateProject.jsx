@@ -10,6 +10,7 @@ const CreateProject = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,17 +19,18 @@ const CreateProject = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage("");
 
     const goalAmount = parseFloat(projectData.goalAmount);
     const endDate = new Date(projectData.endDate);
     const today = new Date();
 
     if (goalAmount <= 0) {
-      alert("Goal amount should be a positive number.");
+      setErrorMessage("Goal amount should be a positive number.");
       return;
     }
     if (endDate <= today) {
-      alert("End date should be in the future.");
+      setErrorMessage("End date should be in the future.");
       return;
     }
 
@@ -47,7 +49,7 @@ const CreateProject = () => {
       setProjectData({ title: "", description: "", goalAmount: "", endDate: "" });
     } catch (error) {
       console.error("Error creating project:", error);
-      alert("Failed to create project. Please try again.");
+      setErrorMessage("Failed to create project. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -56,7 +58,9 @@ const CreateProject = () => {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Create a Project</h1>
-      <form onSubmit={handleSubmit} className="space-y-4 bg-white shadow-md rounded-lg p-8">
+      <form onSubmit={handleSubmit} className="form-container space-y-4">
+        {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+
         {/* Title Input */}
         <div>
           <label htmlFor="title" className="block mb-1 font-medium">Title</label>
@@ -67,7 +71,8 @@ const CreateProject = () => {
             value={projectData.title}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field w-full"
+            placeholder="Enter project title"
           />
         </div>
 
@@ -80,8 +85,9 @@ const CreateProject = () => {
             value={projectData.description}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field w-full"
             rows="4"
+            placeholder="Describe your project"
           ></textarea>
         </div>
 
@@ -95,7 +101,8 @@ const CreateProject = () => {
             value={projectData.goalAmount}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field w-full"
+            placeholder="Enter goal amount"
           />
         </div>
 
@@ -109,14 +116,14 @@ const CreateProject = () => {
             value={projectData.endDate}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field w-full"
           />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className={`w-full px-4 py-2 rounded-lg text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+          className={`auth-button w-full ${loading ? 'loading' : ''}`}
           disabled={loading}
         >
           {loading ? 'Creating Project...' : 'Create Project'}
