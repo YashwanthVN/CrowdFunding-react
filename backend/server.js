@@ -1,15 +1,39 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs'); // Added fs module
+const path = require('path');
 const app = express();
 
 app.use(cors()); // Allow frontend requests
 app.use(express.json()); // Parse JSON bodies
 
-let projects = []; // In-memory storage
+let projects = []; // In-memory storage, initialized from file
+
+// Load projects from file on startup
+const loadProjects = () => {
+  try {
+    const data = fs.readFileSync(path.join(__dirname, 'projects.json'), 'utf8');
+    projects = JSON.parse(data) || [];
+    console.log("Loaded projects from projects.json:", projects);
+  } catch (error) {
+    console.error("Error loading projects.json on startup:", error.message);
+    projects = []; // Default to empty array if file is missing or invalid
+  }
+};
+
+loadProjects(); // Initial load
 
 // Get all projects
 app.get('/projects', (req, res) => {
-  res.json(projects);
+  console.log("Serving /projects");
+  try {
+    const projectsData = JSON.parse(fs.readFileSync(path.join(__dirname, 'projects.json'), 'utf8'));
+    console.log("Parsed projects:", projectsData);
+    res.json(projectsData);
+  } catch (error) {
+    console.error("Error reading projects.json:", error.message);
+    res.status(500).json({ error: "Failed to read projects data" });
+  }
 });
 
 // Create a new project
@@ -20,6 +44,8 @@ app.post('/projects', (req, res) => {
     currentAmount: 0, // Default current funding
   };
   projects.push(newProject);
+  // Save to file
+  fs.writeFileSync(path.join(__dirname, 'projects.json'), JSON.stringify(projects, null, 2));
   res.json(newProject);
 });
 
@@ -38,6 +64,7 @@ app.put('/projects/:id', (req, res) => {
   const index = projects.findIndex(p => p.id === parseInt(req.params.id));
   if (index !== -1) {
     projects[index] = { ...projects[index], ...req.body };
+    fs.writeFileSync(path.join(__dirname, 'projects.json'), JSON.stringify(projects, null, 2));
     res.json(projects[index]);
   } else {
     res.status(404).json({ message: "Project not found" });
@@ -49,13 +76,14 @@ app.delete('/projects/:id', (req, res) => {
   const index = projects.findIndex(p => p.id === parseInt(req.params.id));
   if (index !== -1) {
     projects.splice(index, 1);
+    fs.writeFileSync(path.join(__dirname, 'projects.json'), JSON.stringify(projects, null, 2));
     res.json({ message: "Project deleted" });
   } else {
     res.status(404).json({ message: "Project not found" });
   }
 });
 
-// Dashboard data (e.g., total projects, funded, etc.)
+// Dashboard data
 app.get('/dashboard', (req, res) => {
   const totalProjects = projects.length;
   const fundedProjects = projects.filter(p => p.currentAmount >= p.goal_amount).length;

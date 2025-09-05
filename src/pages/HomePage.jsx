@@ -8,42 +8,38 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const fetchProjects = async () => {
-    console.log("Fetching projects...");
-    try {
-      const apiUrl = import.meta.env.VITE_API_BASE_URL;
-      if (!apiUrl) {
-        throw new Error("API base URL is not defined");
+    const fetchProjects = async () => {
+      console.log("Fetching projects...");
+      try {
+        const response = await getProjects();
+        console.log("API Response:", response);
+        const projectsArray = Array.isArray(response) ? response : [];
+        setProjects(projectsArray);
+      } catch (error) {
+        console.error("Error fetching project data:", error.message);
+        setError(`Failed to load projects: ${error.message}. Please try again later.`);
+      } finally {
+        console.log("Fetch complete, loading set to false");
+        setLoading(false);
       }
-      console.log("API URL:", apiUrl);
-      const response = await getProjects();
-      console.log("API Response:", response);
-      const projectsArray = Array.isArray(response) ? response : response.projects || [];
-      setProjects(projectsArray);
-    } catch (error) {
-      console.error("Error fetching project data:", error);
-      setError("Failed to load projects. Please try again later.");
-    } finally {
-      console.log("Fetch complete, loading set to false");
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchProjects();
-}, []);
+    fetchProjects();
+  }, []);
 
   return (
-    <div>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+    <div className="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Featured Projects</h1>
+      {loading && <p className="text-center text-gray-600">Loading projects...</p>}
+      {error && <p className="text-red-500 text-center">{error}</p>}
       {!loading && !error && (
-        <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.length > 0 ? (
             projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))
           ) : (
-            <p>No projects available.</p>
+            <p className="text-center text-gray-500">No projects available.</p>
           )}
         </div>
       )}
