@@ -75,25 +75,25 @@ const ProjectCard = ({ project }) => {
           Support This Project
         </button>
 
-      {isPopupOpen && (
-        <div className="popup-overlay" onClick={handleClosePopup}>
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <h3 className="title">Enter Donation Amount</h3>
-            <input
-              type="number"
-              value={donationAmount}
-              onChange={(e) => setDonationAmount(e.target.value)}
-              className="donation-input"
-              placeholder="Enter amount in $"
-              min="1"
-            />
-            <div className="popup-buttons">
-              <button className="button" onClick={handleDonate}>Donate</button>
-              <button className="button cancel-button" onClick={handleClosePopup}>Cancel</button>
+        {isPopupOpen && (
+          <div className="popup-overlay" onClick={handleClosePopup}>
+            <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+              <h3 className="title">Enter Donation Amount</h3>
+              <input
+                type="number"
+                value={donationAmount}
+                onChange={(e) => setDonationAmount(e.target.value)}
+                className="donation-input"
+                placeholder="Enter amount in $"
+                min="1"
+              />
+              <div className="popup-buttons">
+                <button className="button" onClick={handleDonate}>Donate</button>
+                <button className="button cancel-button" onClick={handleClosePopup}>Cancel</button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </div>
   );

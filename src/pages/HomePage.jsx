@@ -19,7 +19,6 @@ const Home = () => {
         console.error("Error fetching project data:", error.message);
         setError(`Failed to load projects: ${error.message}. Please try again later.`);
       } finally {
-        console.log("Fetch complete, loading set to false");
         setLoading(false);
       }
     };
@@ -33,7 +32,7 @@ const Home = () => {
       {loading && <p className="text-center text-gray-600">Loading projects...</p>}
       {error && <p className="text-red-500 text-center">{error}</p>}
       {!loading && !error && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.length > 0 ? (
             projects.map((project) => (
               <ProjectCard key={project.id} project={project} />

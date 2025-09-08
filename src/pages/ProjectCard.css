@@ -1,10 +1,12 @@
-/* Existing styles remain unchanged */
 .project-card {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 50%; 
+  max-width: 500px; 
+  margin: 0 auto;
 }
 
 .project-image {
@@ -99,7 +101,6 @@
   color: #ef4444;
 }
 
-/* New styles for pop-up */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -118,7 +119,7 @@
   border-radius: 0.5rem;
   padding: 1.25rem;
   width: 90%;
-  max-width: 400px;
+  max-width: 00px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
