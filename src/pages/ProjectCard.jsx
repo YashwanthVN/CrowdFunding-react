@@ -1,56 +1,61 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import './ProjectCard.css'; // Import the custom CSS file
 
 const ProjectCard = ({ project }) => {
-  if (!project) return <div>Error: Project data missing</div>; // Debug fallback
-  const currentAmount = project.currentAmount || 0;
+  if (!project) return <div className="error-message">Error: Project data missing</div>;
+  const [currentAmount, setCurrentAmount] = useState(project.currentAmount || 0);
   const goalAmount = project.goal_amount || 1;
   const progress = (currentAmount / goalAmount) * 100;
   const imageUrl = project.imageUrl || 'https://via.placeholder.com/400x200';
 
+  const handleSupport = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/projects/${project.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amountToAdd: 100 }), // Match the backend parameter
+      });
+      const updatedProject = await response.json();
+      setCurrentAmount(updatedProject.currentAmount);
+      alert('Thank you for your support!');
+    } catch (error) {
+      console.error('Support failed:', error.message);
+      alert('Failed to support project. Please try again.');
+    }
+  };
+
   return (
-    <motion.div
-      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform-gpu"
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
-      style={{ transformOrigin: 'center' }}
-    >
+    <div className="project-card">
       <img
         src={imageUrl}
         alt={project.title || 'Project Image'}
-        className="w-full h-48 object-cover rounded-t-lg"
-        aria-label={`Image of ${project.title || 'Untitled Project'}`}
+        className="project-image"
       />
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-2">
-          <h3 className="text-xl font-semibold text-gray-900 truncate">{project.title || 'Untitled Project'}</h3>
-          <span className="text-gray-600 font-medium text-sm">
-            Goal: ${goalAmount.toLocaleString()}
-          </span>
+      <div className="content">
+        <div className="header">
+          <h3 className="title">{project.title || 'Untitled Project'}</h3>
+          <span className="goal">Goal: ${goalAmount.toLocaleString()}</span>
         </div>
-        <p className="text-gray-700 mb-4 line-clamp-2">{project.description || 'No description available.'}</p>
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-green-600 font-bold">
-            ${currentAmount.toLocaleString()} raised
-          </span>
-          <span className="text-gray-500 text-sm">
-            Ends: {project.end_date || 'N/A'}
-          </span>
+        <p className="description">{project.description || 'No description available.'}</p>
+        <div className="stats">
+          <span className="raised">${currentAmount.toLocaleString()} raised</span>
+          <span className="end-date">Ends: {new Date(project.end_date).toLocaleDateString() || 'N/A'}</span>
         </div>
-        <div className="bg-gray-300 rounded-full h-2 mb-4">
+        <div className="progress">
           <div
-            className="bg-green-500 rounded-full h-2 transition-all duration-300"
+            className="progress-bar"
             style={{ width: `${Math.min(progress, 100)}%` }}
           ></div>
         </div>
         <button
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium text-center"
+          className="button"
+          onClick={handleSupport}
           aria-label={`Support ${project.title || 'this project'}`}
         >
           Support This Project
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

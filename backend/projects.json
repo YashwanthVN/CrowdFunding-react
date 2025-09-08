@@ -5,6 +5,6 @@
     "description": "First test case of the project",
     "goal_amount": 1000,
     "end_date": "2025-09-26",
-    "currentAmount": 0
+    "currentAmount": 200
   }
 ]

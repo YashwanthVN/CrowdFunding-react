@@ -71,6 +71,21 @@ app.put('/projects/:id', (req, res) => {
   }
 });
 
+// Support a project (increment currentAmount)
+app.patch('/projects/:id', (req, res) => {
+  const projectId = parseInt(req.params.id);
+  const index = projects.findIndex(p => p.id === projectId);
+  if (index !== -1) {
+    const amountToAdd = parseInt(req.body.amountToAdd) || 100; // Default to $100 if not specified
+    projects[index].currentAmount = Math.max(0, (projects[index].currentAmount || 0) + amountToAdd);
+    fs.writeFileSync(path.join(__dirname, 'projects.json'), JSON.stringify(projects, null, 2));
+    console.log(`Supported project ${projectId}, new currentAmount: ${projects[index].currentAmount}`);
+    res.json(projects[index]);
+  } else {
+    res.status(404).json({ message: "Project not found" });
+  }
+});
+
 // Delete a project
 app.delete('/projects/:id', (req, res) => {
   const index = projects.findIndex(p => p.id === parseInt(req.params.id));
