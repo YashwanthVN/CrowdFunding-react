@@ -40,7 +40,7 @@ code {
 .toggle-menu ul {
   list-style: none;
   margin: 0;
-  padding: 2rem 0 0 0; /* Offset to avoid logo overlap */
+  padding: 2rem 0 0 0; 
 }
 
 .toggle-menu li a {
@@ -59,7 +59,6 @@ code {
   font-weight: bold;
 }
 
-/* Toggle button styling */
 .toggle-button {
   position: fixed;
   top: 0.5rem;
@@ -79,13 +78,12 @@ code {
   stroke-width: 2;
 }
 
-/* Apple-inspired global styles */
 h1, h2, h3 {
-  font-weight: 600; /* Bold but not heavy */
+  font-weight: 600;
 }
 
 label {
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   color: #6c757d; /* Gray for labels */
 }
 
@@ -99,8 +97,8 @@ label {
 }
 
 .input-field:focus {
-  border-color: #007aff; /* Apple's blue */
-  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); /* Subtle focus ring */
+  border-color: #007aff; 
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); 
 }
 
 .auth-button {
@@ -128,7 +126,7 @@ label {
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  max-width: 28rem; /* Apple-like narrow form width */
+  max-width: 28rem;
   margin: 0 auto;
 }
 
@@ -143,4 +141,103 @@ label {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background: #fff;
   overflow: hidden;
+}
+
+.hamburger-wrapper {
+  position: absolute;
+  top: 0.9rem;
+  left: 1rem;
+  z-index: 60;
+}
+
+.hamburger-react div {
+  background-color: black !important;
+}
+.header {
+  background-color: #007aff;
+  color: white;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 40px;
+}
+
+/* Sidebar */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background-color: #ffffff;
+  padding: 80px 20px 20px;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-item {
+  margin-bottom: 20px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(0,122,255,0.1);
+  color: #007aff;
+}
+
+.sidebar-link.active {
+  background: #007aff;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin: 1rem 0;
 }
